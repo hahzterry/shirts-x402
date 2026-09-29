@@ -27,7 +27,7 @@
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@tanstack/react-query": "^5.84.1",
     "@ts-rest/core": "^3.52.1",
-    "@ts-rest/next": "^3.52.1",
+    "@ts-rest/next": "3.52.1",
     "@ts-rest/open-api": "^3.52.1",
     "ai": "5.0.19",
     "autonumeric": "^4.10.9",
@@ -38,8 +38,8 @@
     "lucide-react": "^0.542.0",
     "next": "15.5.2",
     "printify-sdk-js": "^1.3.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-syntax-highlighter": "^15.6.6",
     "shiki": "^3.12.2",
     "streamdown": "^1.2.0",
@@ -50,15 +50,15 @@
     "x402": "^0.6.5",
     "x402-fetch": "^0.6.0",
     "x402-next": "^0.6.5",
-    "zod": "^4.1.5"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@next/eslint-plugin-next": "^15.5.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "eslint": "^9.36.0",
     "openapi-typescript": "^7.9.1",
@@ -70,11 +70,10 @@
   },
   "overrides": {
     "ai": "5.0.19",
-    "@ai-sdk/react": "2.0.17",
     "@ai-sdk/openai": "2.0.16",
+    "next": "15.5.2",
     "@merit-systems/echo-react-sdk": {
-      "ai": "5.0.19",
-      "@ai-sdk/react": "2.0.17"
+      "ai": "5.0.19"
     },
     "@merit-systems/echo-next-sdk": {
       "ai": "5.0.19",
