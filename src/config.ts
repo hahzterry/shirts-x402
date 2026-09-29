@@ -11,6 +11,6 @@ export const config = createConfig(
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
     appName: "Shirt.sh",
     appDescription: "Shirt.sh Application",
-    appUrl: "https://shirt.sh",
+    appUrl: "https://shirts-x402.vercel.app/",
   }),
 );
