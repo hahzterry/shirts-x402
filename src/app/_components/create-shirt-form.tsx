@@ -12,6 +12,40 @@ import { Signer, wrapFetchWithPayment } from "x402-fetch";
 
 type Mode = "prompt" | "image";
 
+// The address payload sent to the Printify order. Same shape on both
+// mutations, so define it once and reuse.
+type ShippingAddress = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+  country: string;
+  region: string;
+  address1: string;
+  address2: string;
+  city: string;
+  zip: string;
+};
+
+// The shape thrown by the API on failure. The route returns JSON errors,
+// so narrow to this instead of casting to `any`.
+type ApiError = {
+  error?: {
+    message?: string;
+  };
+  message?: string;
+};
+
+function readErrorMessage(err: unknown): string {
+  if (!err) return "An error occurred";
+  if (typeof err === "string") return err;
+  if (typeof err === "object") {
+    const e = err as ApiError;
+    return e.error?.message ?? e.message ?? "An error occurred";
+  }
+  return "An error occurred";
+}
+
 export function CreateShirtForm() {
   const { data: walletClient } = useWalletClient();
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -73,7 +107,7 @@ export function CreateShirtForm() {
       imageUrl: string;
       size: string;
       color: string;
-      address_to: any;
+      address_to: ShippingAddress;
     }) => {
       if (!walletClient) {
         throw new Error("Wallet not connected");
@@ -145,7 +179,7 @@ export function CreateShirtForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const addressPayload = {
+    const addressPayload: ShippingAddress = {
       first_name: formData.first_name,
       last_name: formData.last_name,
       email: formData.email,
@@ -300,6 +334,7 @@ export function CreateShirtForm() {
                   {(imageFile || imageUrl) && (
                     <div className="border rounded-lg p-4 bg-muted">
                       <p className="text-sm font-medium mb-2">Preview:</p>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={imageFile || imageUrl}
                         alt="Preview"
@@ -644,6 +679,7 @@ export function CreateShirtForm() {
                     {data.imageUrl && (
                       <div className="space-y-2">
                         <span className="text-muted-foreground text-sm">Design:</span>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={data.imageUrl}
                           alt="Shirt design"
@@ -676,11 +712,11 @@ export function CreateShirtForm() {
             <CardHeader>
               <CardTitle className="text-red-900 dark:text-red-100">✕ Error</CardTitle>
               <CardDescription>
-                {(
-                  (mode === "prompt"
+                {readErrorMessage(
+                  mode === "prompt"
                     ? createShirtMutation.error
-                    : createShirtFromImageMutation.error) as any
-                )?.error?.message || "An error occurred"}
+                    : createShirtFromImageMutation.error,
+                )}
               </CardDescription>
             </CardHeader>
             <CardContent>
