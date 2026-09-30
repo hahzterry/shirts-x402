@@ -1,0 +1,10 @@
+packages:
+  - '.'
+
+overrides:
+  "ai": "5.0.19"
+  "@ai-sdk/openai": "2.0.16"
+  "@ts-rest/next>next": "15.5.2"
+  "@merit-systems/echo-react-sdk>ai": "5.0.19"
+  "@merit-systems/echo-next-sdk>ai": "5.0.19"
+  "@merit-systems/echo-next-sdk>@ai-sdk/openai": "2.0.16"
